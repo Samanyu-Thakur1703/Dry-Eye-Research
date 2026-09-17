@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dry Eye Assessment | MVP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">DE</div>
+        <div>
+          <h1>Dry Eye Assessment</h1>
+          
+        </div>
+      </div>
+    
+    </header>
+
+    <main class="main-content">
+      <section class="hero-card">
+        <div>
+          <span class="eyebrow">DOCTOR WORKSPACE</span>
+          <h2>Enter patient measurements</h2>
+          <p>Complete the values below to generate a rule-based assessment.</p>
+        </div>
+        <div class="hero-icon">◉</div>
+      </section>
+
+      <section class="content-grid">
+        <form id="assessmentForm" class="card form-card" novalidate>
+          <div class="card-heading">
+            <div>
+              <h3>Patient details</h3>
+              <p>Use the measurements supplied by the clinical team.</p>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field full-width">
+              <label for="patientId">Patient ID <span class="optional">optional</span></label>
+              <input id="patientId" name="patientId" type="text" placeholder="e.g. DE-0012" autocomplete="off" />
+            </div>
+
+            <div class="field">
+              <label for="age">Age <span class="unit">years</span></label>
+              <input id="age" name="age" type="number" min="0" max="120" step="1" placeholder="e.g. 32" required />
+              <small class="error" id="ageError"></small>
+            </div>
+
+            <div class="field">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other / Prefer not to say</option>
+              </select>
+              <small class="error" id="genderError"></small>
+            </div>
+
+            <div class="field">
+              <label for="osdi">OSDI <span class="unit">score</span></label>
+              <input id="osdi" name="osdi" type="number" min="0" max="24" step="0.1" placeholder="0–24" required />
+              
+              <small class="error" id="osdiError"></small>
+            </div>
+
+            <div class="field">
+              <label for="tbut">TBUT <span class="unit">seconds</span></label>
+              <input id="tbut" name="tbut" type="number" min="0" max="120" step="0.1" placeholder="e.g. 8.5" required />
+             
+              <small class="error" id="tbutError"></small>
+            </div>
+
+            <div class="field">
+              <label for="tmh">TMH <span class="unit">mm</span></label>
+              <input id="tmh" name="tmh" type="number" min="0" max="10" step="0.01" placeholder="e.g. 0.18" required />
+              
+              <small class="error" id="tmhError"></small>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button type="button" class="btn secondary" id="resetBtn">Reset</button>
+            <button type="submit" class="btn primary">Calculate assessment <span>→</span></button>
+          </div>
+        </form>
+
+        <section class="card result-card" id="resultCard" aria-live="polite">
+          <div class="result-empty" id="emptyState">
+            <div class="empty-icon">✦</div>
+            <h3>Assessment ready</h3>
+            <p>Enter the patient values and select <strong>Calculate assessment</strong>.</p>
+          </div>
+
+          <div class="result-content hidden" id="resultContent">
+            <div class="result-header">
+              <div>
+                <span class="eyebrow">ASSESSMENT RESULT</span>
+                <h3 id="resultTitle">—</h3>
+              </div>
+              <div class="status-badge" id="statusBadge">—</div>
+            </div>
+
+            <div class="summary-box" id="summaryText"></div>
+
+            <div class="section-title">Parameter findings</div>
+            <div class="finding-list" id="findingList"></div>
+
+            <div class="section-title">Additional risk factors</div>
+            <div class="risk-list" id="riskList"></div>
+
+            <div class="result-footer">
+              <span>Rule-based MVP</span>
+              <span id="timestamp"></span>
+            </div>
+
+            <div class="disclaimer">
+              This tool is a prototype decision-support interface based on the supplied dataset. It is not a medical diagnosis or a substitute for clinical judgment.
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
