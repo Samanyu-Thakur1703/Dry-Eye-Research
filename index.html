@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dry Eye Assessment | MVP</title>
+  <title>Dry Eye Assessment</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,23 +13,23 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-mark">DE</div>
+        <div class="brand-mark" aria-hidden="true">DE</div>
         <div>
           <h1>Dry Eye Assessment</h1>
-          
+          <p>Clinical screening workspace</p>
         </div>
       </div>
-    
+      <span class="mvp-pill">MVP</span>
     </header>
 
     <main class="main-content">
       <section class="hero-card">
         <div>
           <span class="eyebrow">DOCTOR WORKSPACE</span>
-          <h2>Enter patient measurements</h2>
-          <p>Complete the values below to generate an engine-based assessment.</p>
+          <h2>Assess dry-eye indicators</h2>
+          <p>Enter the patient measurements to view the assessment and risk indicator.</p>
         </div>
-        <div class="hero-icon">◉</div>
+        <div class="hero-icon" aria-hidden="true">◉</div>
       </section>
 
       <section class="content-grid">
@@ -37,7 +37,7 @@
           <div class="card-heading">
             <div>
               <h3>Patient details</h3>
-              <p>Use the measurements supplied by the clinical team.</p>
+              <p>Enter the measurements provided during examination.</p>
             </div>
           </div>
 
@@ -65,23 +65,23 @@
             </div>
 
             <div class="field">
-              <label for="osdi">OSDI <span class="unit">score</span></label>
-              <input id="osdi" name="osdi" type="number" min="0" max="24" step="0.1" placeholder="0–24" required />
-              
+              <label for="osdi">OSDI-6 <span class="unit">score / 24</span></label>
+              <input id="osdi" name="osdi" type="number" min="0" max="24" step="1" placeholder="0–24" required />
+              <small class="hint">0–3 Normal · 4–8 Mild–Moderate · 9–24 Severe</small>
               <small class="error" id="osdiError"></small>
             </div>
 
             <div class="field">
               <label for="tbut">TBUT <span class="unit">seconds</span></label>
               <input id="tbut" name="tbut" type="number" min="0" max="120" step="0.1" placeholder="e.g. 8.5" required />
-             
+              <small class="hint">&gt;10 Normal · 6–10 Mild · 3–5 Moderate · &lt;3 Severe / immediate</small>
               <small class="error" id="tbutError"></small>
             </div>
 
             <div class="field">
               <label for="tmh">TMH <span class="unit">mm</span></label>
               <input id="tmh" name="tmh" type="number" min="0" max="10" step="0.01" placeholder="e.g. 0.18" required />
-              
+              <small class="hint">0.20–0.30 Normal · &lt;0.20 Abnormal</small>
               <small class="error" id="tmhError"></small>
             </div>
           </div>
@@ -95,8 +95,8 @@
         <section class="card result-card" id="resultCard" aria-live="polite">
           <div class="result-empty" id="emptyState">
             <div class="empty-icon">✦</div>
-            <h3>Assessment ready</h3>
-            <p>Enter the patient values and select <strong>Calculate assessment</strong>.</p>
+            <h3>Ready for assessment</h3>
+            <p>Enter the patient measurements and calculate the assessment to see the dry-eye indicator.</p>
           </div>
 
           <div class="result-content hidden" id="resultContent">
@@ -108,21 +108,44 @@
               <div class="status-badge" id="statusBadge">—</div>
             </div>
 
+            <div class="meter-panel">
+              <div class="meter-heading">
+                <div>
+                  <span class="section-kicker">DRY-EYE RISK INDICATOR</span>
+                  <div class="meter-label" id="meterLabel">—</div>
+                </div>
+                <div class="meter-score" id="meterScore">—</div>
+              </div>
+
+              <div class="gauge-wrap" id="gaugeWrap" aria-label="Dry-eye risk indicator">
+                <div class="gauge">
+                  <div class="gauge-cutout"></div>
+                  <div class="needle" id="needle"></div>
+                  <div class="needle-hub"></div>
+                </div>
+                <div class="gauge-scale left">Normal</div>
+                <div class="gauge-scale mild">Mild</div>
+                <div class="gauge-scale moderate">Moderate</div>
+                <div class="gauge-scale right">Severe</div>
+              </div>
+              <div class="meter-note">Visual indicator based on the current OSDI-6 and TBUT assessment ranges.</div>
+            </div>
+
             <div class="summary-box" id="summaryText"></div>
 
             <div class="section-title">Parameter findings</div>
             <div class="finding-list" id="findingList"></div>
 
-            <div class="section-title">Additional risk factors</div>
+            <div class="section-title">Additional factors</div>
             <div class="risk-list" id="riskList"></div>
 
             <div class="result-footer">
-              <span>Rule-based MVP</span>
+              <span>Clinical screening MVP</span>
               <span id="timestamp"></span>
             </div>
 
             <div class="disclaimer">
-              This tool is a prototype decision-support interface based on the supplied dataset. It is not a medical diagnosis or a substitute for clinical judgment.
+              Prototype for clinical decision support. The risk indicator is a visual summary of the supplied assessment ranges and is not a validated standalone diagnostic score. Final interpretation remains with the clinician.
             </div>
           </div>
         </section>

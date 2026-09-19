@@ -1,6 +1,7 @@
+
 # Dry Eye Assessment MVP
 
-A simple, responsive, engine-based dry-eye assessment prototype for doctor-facing use.
+A simple, responsive, rule-based dry-eye assessment prototype for doctor-facing use.
 
 ## Run
 
